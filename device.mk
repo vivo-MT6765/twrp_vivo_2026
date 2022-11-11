@@ -15,3 +15,8 @@
 #
 
 DEVICE_PATH := device/vivo/2026
+
+PRODUCT_SHIPPING_API_LEVEL := 29
+
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
