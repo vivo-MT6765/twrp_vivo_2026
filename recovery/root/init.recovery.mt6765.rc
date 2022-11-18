@@ -20,13 +20,13 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     seclabel u:r:recovery:s0
 
 service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry \
-	-r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/05120000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/05140000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/020b0000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/05070000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/030b0000000000000000000000000000.drbin \
-	-r /vendor/app/mcRegistry/030c0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/05120000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/05140000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/020b0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/05070000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/030b0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/030c0000000000000000000000000000.drbin \
 	-r /vendor/app/mcRegistry/07060000000000000000000000007169.drbin \
 	-r /vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin \
 	-r /vendor/app/mcRegistry/04020000000000000000000000000000.drbin \
@@ -36,16 +36,16 @@ service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry 
         -r /vendor/app/mcRegistry/62d690ff530e46cfb472ec52c4da3773.drbin
     seclabel u:r:recovery:s0
 
-service keymaster-4-0 /vendor/bin/hw/android.hardware.keymaster@4.0-service.trustonic
-    disabled
+service vendor.keymaster-4-0-trustonic /system/bin/android.hardware.keymaster@4.0-service.trustonic
     user root
     group root drmrpc
+    disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /vendor/bin/android.hardware.gatekeeper@1.0-service
-    disabled
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     user root
     group root
+    disabled
     seclabel u:r:recovery:s0
 
 service guardianangle  /system/bin/guardianangle
@@ -60,7 +60,7 @@ service vivofbe /system/bin/vivofbe
     oneshot
     seclabel u:r:recovery:s0
 
-on property:ro.crypto.state=encrypted
+on property:hwservicemanager.ready=true
     start mobicore
     start keymaster-4-0
     start gatekeeper-1-0
