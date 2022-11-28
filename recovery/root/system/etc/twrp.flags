@@ -6,6 +6,7 @@
 /vbmeta          emmc      /dev/block/platform/bootdevice/by-name/vbmeta      flags=backup;flashimg
 /persist         ext4      /dev/block/platform/bootdevice/by-name/persist
 /metadata        ext4      /dev/block/platform/bootdevice/by-name/md_udc
+/data            ext4      /dev/block/platform/bootdevice/by-name/userdata    flags=fileencryption=aes-256-xts:aes-256-cts:v2,keydirectory=/metadata/vold/metadata_encryption
 
 # vivo partition
 /vgc             ext4       /dev/block/platform/bootdevice/by-name/vgc        flags=display="VGC"
@@ -19,6 +20,9 @@
 /nvcfg           emmc      /dev/block/platform/bootdevice/by-name/nvcfg       flags=backup
 /nvram           emmc      /dev/block/platform/bootdevice/by-name/nvram       flags=backup
 /proinfo         emmc      /dev/block/platform/bootdevice/by-name/proinfo     flags=backup
+
+# Internal storage
+/storage         ext4      /data/media/0                                      flags=display="Internal Storage";backup=1;usermrf;fsflags="bind";removable
 
 # Removable storage
 /external_sd     auto      /dev/block/mmcblk1p1         /dev/block/mmcblk1
