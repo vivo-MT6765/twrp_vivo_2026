@@ -10,7 +10,7 @@
 
 # vivo partition
 /vgc             ext4       /dev/block/platform/bootdevice/by-name/vgc        flags=display="VGC"
-/oem		     ext4	    /dev/block/platform/bootdevice/by-name/cust	      flags=display="Cust"
+/oem             ext4	    /dev/block/platform/bootdevice/by-name/cust	      flags=display="Cust"
 
 # IMEI and modem related
 # below four partitions are ext4, but we are using only for backup so emmc

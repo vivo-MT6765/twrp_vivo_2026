@@ -6,16 +6,16 @@ on fs
     install_keyring
     setprop crypto.ready 1
 
+service keystore2 /system/bin/keystore2
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
 service keystore_auth /system/bin/keystore_auth
     oneshot
     user system
     group root
-    disabled
-    seclabel u:r:recovery:s0
-
-service keystore2 /system/bin/keystore2 /tmp/misc/keystore
-    user root
-    group root drmrpc readproc
     disabled
     seclabel u:r:recovery:s0
 
@@ -56,6 +56,7 @@ on property:hwservicemanager.ready=true
     start mobicore
     start keymaster-4-0
     start gatekeeper-1-0
+    start keystore2
     start guardianangle
     start vivofbe
 
