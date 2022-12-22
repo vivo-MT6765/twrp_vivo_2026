@@ -1,10 +1,10 @@
+import /tee.rc
+
 on init
-    mkdir /mnt/vendor/persist
-    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
 on fs
     install_keyring
-    setprop crypto.ready 1
 
 service keystore_auth /system/bin/keystore_auth
     oneshot
@@ -15,7 +15,7 @@ service keystore_auth /system/bin/keystore_auth
 
 service keystore /system/bin/keystore /tmp/misc/keystore
     user root
-    group root drmrpc readproc
+    group root drmrpc readproc log
     disabled
     seclabel u:r:recovery:s0
 
@@ -36,7 +36,7 @@ service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry 
         -r /vendor/app/mcRegistry/62d690ff530e46cfb472ec52c4da3773.drbin
     seclabel u:r:recovery:s0
 
-service vendor.keymaster-4-0-trustonic /system/bin/android.hardware.keymaster@4.0-service.trustonic
+service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service.trustonic
     user root
     group root drmrpc
     disabled
